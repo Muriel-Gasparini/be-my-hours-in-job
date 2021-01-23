@@ -1,0 +1,8 @@
+{
+  "name": "be-my-hours-in-job",
+  "version": "1.0.0",
+  "description": "Back End for my app (My Hours In Job)",
+  "main": "index.js",
+  "author": "Muriel Gasparini <muriel.developer@gmail.com>",
+  "license": "MIT"
+}
