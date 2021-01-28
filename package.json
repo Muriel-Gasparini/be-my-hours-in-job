@@ -2,19 +2,26 @@
   "name": "be-my-hours-in-job",
   "version": "1.0.0",
   "description": "Back End for my app (My Hours In Job)",
-  "main": "src/server.js",
+  "main": "src/server/server.js",
   "author": "Muriel Gasparini <muriel.developer@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "helmet": "^4.4.1",
+    "joi": "^17.3.0",
+    "mongoose": "^5.11.13"
   },
   "scripts": {
     "build": "babel src -d dist",
-    "start": "npm run build && node dist/server.js",
-    "dev": "npm run build && nodemon dist/server.js"
+    "start": "yarn build && babel-node src/server/server.js",
+    "dev": "yarn build && nodemon --exec babel-node src/server/server.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11"
   }
 }
