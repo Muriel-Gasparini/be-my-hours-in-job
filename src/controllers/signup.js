@@ -2,10 +2,9 @@ import { UserRepository } from '../database/repositories/user-repository'
 import { validator } from '../middlewares/body-validation/validator'
 import Notify from '../utils/notify'
 
-
 export async function signUpController (req, res) {
   try {
-    const { isError, message } = validator('login', req.body)
+    const { isError, message } = validator('signup', req.body)
 
     if (isError) return res.status(400).json(message)
 
