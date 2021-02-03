@@ -15,7 +15,7 @@ export class HashString {
     }
   }
 
-  static async decode (string, hashedString) {
+  static async compare (string, hashedString) {
     try {
       return await bcrypt.compare(string, hashedString)
     } catch (error) {
