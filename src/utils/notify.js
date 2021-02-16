@@ -1,16 +1,16 @@
-import { log, error, warn } from 'console'
+import console, { log, warn } from 'console'
 
 class Notify {
-  static error (errorMessage) {
-    error(`Ooops this error as been ocurred ┗( T﹏T )┛: ${errorMessage}`)
+  static error (errorMessage, error) {
+    console.error(`👹 ${errorMessage} ----> ${error}`)
   }
 
   static log (logMessage) {
-    log(`༼ つ ◕_◕ ༽つ ${logMessage}`)
+    log(`👾 ${logMessage}`)
   }
 
   static warning (warningMessage) {
-    warn(`Pay attention to this (┬┬﹏┬┬): ${warningMessage}`)
+    warn(`🚧 ${warningMessage}`)
   }
 }
 
