@@ -1,10 +1,4 @@
 {
-  "name": "be-my-hours-in-job",
-  "version": "1.0.0",
-  "description": "Back End for my app (My Hours In Job)",
-  "main": "src/server/server.js",
-  "author": "Muriel Gasparini <muriel.developer@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -15,15 +9,19 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.13"
   },
-  "scripts": {
-    "build": "babel src -d dist",
-    "start": "yarn build && babel-node src/server/server.js",
-    "dev": "yarn build && nodemon --exec babel-node src/server/server.js"
-  },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/node": "^7.12.10",
-    "@babel/preset-env": "^7.12.11"
-  }
+    "nodemon": "^2.0.7",
+    "sucrase": "^3.17.1"
+  },
+  "scripts": {
+    "build": "sucrase ./src -d ./dist --transforms imports",
+    "start": "yarn build && node dist/server/server.js",
+    "dev": "nodemon src/server/server.js"
+  },
+  "name": "be-my-hours-in-job",
+  "version": "1.0.0",
+  "description": "Back End for my app (My Hours In Job)",
+  "main": "src/server/server.js",
+  "author": "Muriel Gasparini <muriel.developer@gmail.com>",
+  "license": "MIT"
 }
