@@ -3,6 +3,7 @@ import { validator } from '../middlewares/body-validation/validator'
 import { HashString } from '../utils/hash-string'
 import { JsonWebToken } from '../utils/jwt'
 import Notify from '../utils/notify'
+import httpMessage from '../utils/http-messages'
 
 export async function signInController (req, res) {
   try {
@@ -10,19 +11,17 @@ export async function signInController (req, res) {
 
     const { isError, message } = validator('signin', req.body)
 
-    if (isError) return res.status(400).json(message)
+    if (isError) return httpMessage.badRequest(message, res)
 
-    let { accountExists, account } = await UserRepository.findOne({ login })
+    const { accountNotExists, account } = await UserRepository.findOne({ login })
 
-    account = JSON.stringify(account)
-    account = JSON.parse(account)
-Notify.log(account)
-    if (!accountExists) return res.status(400).json({ error: 'This account does not exists' })
+    if (accountNotExists) return httpMessage.badRequest('This account does not exists', res)
 
-    if (!HashString.compare(password, account.password)) return res.status(400).json({ error: 'Invalid Credentials' })
-    
-    res.status(200).json({ id: account.id, token: JsonWebToken.create({ id: account.id }) })
+    if (!await HashString.compare(password, account.password)) return httpMessage.badRequest('Invalid Credentials', res)
+
+    httpMessage.successMessage({ id: account.id, token: JsonWebToken.create({ id: account.id }) }, res)
   } catch (error) {
     Notify.error('Error while sign up', error)
+    httpMessage.internalServerError('An internal server error ocurred, please try again later.', res)
   }
 }
